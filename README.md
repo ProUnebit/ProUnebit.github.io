@@ -4,4 +4,4 @@ Web-marking pages:
 - Mstore
 - Apollo
 
-__[-> Link](https://prounebit.github.io/index.html)__
+__[> Link <](https://prounebit.github.io/index.html)__
