@@ -1,4 +1,4 @@
-# ProUnebit.github.io __[> Link <](https://prounebit.github.io/index.html)__
+# ProUnebit.github.io [> Link <](https://prounebit.github.io/index.html)
 Web-marking pages:
 - DSGN
 - Mstore
