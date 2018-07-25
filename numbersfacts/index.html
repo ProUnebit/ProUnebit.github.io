@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="./bootswatch.min.css">
+    <title>NumbersFact</title>
+</head>
+<body style="background: linear-gradient(to left, #fc5c7d, #6a82fb)">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card bg-dark text-white mt-5 p-5">
+                    <h1><span style="color: violet">Number</span> Facts</h1>
+                    <p>Enter a positive number and get a random fact</p>
+                    <input type="number" class="form-control form-control-lg" id="numberInput" placeholder="Enter number...">
+                    <div id="fact" class="card-body" style="display: none; border-bottom: 1px solid violet">
+                        <h5 class="card-title text-info">Number Fact</h5>
+                        <p id="fact-text" class="card-text" style="font-size: 26px"><em></em></p>
+                    </div>
+                    <div id="incorrectly-num" class="card-body" style="display: none; border-bottom: 1px solid #f5af19">
+                        <h5 class="card-title text-center" style="color: #f5af19">Incorrectly Number</h5>
+                        <p class="card-text text-center">Please enter a <abbr title="number > 0">positive number</abbr></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    let fact = document.querySelector('#fact');
+    let factText = document.querySelector('#fact-text');
+    let incorrectlyNum = document.querySelector('#incorrectly-num');
+    let numberInput = document.querySelector('#numberInput');
+
+    numberInput.addEventListener('input', getFactFetch);
+
+    // AJAX
+    // function getFactAjax(e) {
+    //
+    //     e.preventDefault();
+    //
+    //     let number = numberInput.value;
+    //
+    //     let xhr = new XMLHttpRequest();
+    //
+    //     xhr.open('GET', `http://numbersapi.com/${number}`);
+    //
+    //     xhr.onload = () => {
+    //         if (xhr.status == 200 && number != '' && number > 0) {
+    //                 fact.style.display = 'block';
+    //                 factText.innerText = xhr.responseText;
+    //         }
+    //     }
+    //
+    //     xhr.send();
+    //
+    // }
+
+    // Fetch
+    function getFactFetch() {
+
+        let number = numberInput.value;
+
+        fetch(`http://numbersapi.com/${number}`)
+            .then(res => res.text())
+            .then(data => {
+                if (number != '' && number > 0) {
+                    incorrectlyNum.style.display = 'none';
+                    fact.style.display = 'block';
+                    factText.childNodes[0].innerText = data;
+                } else if (number < 0) {
+                fact.style.display = 'none';
+                incorrectlyNum.style.display = 'block';
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+    </script>
+
+</body>
+</html>
